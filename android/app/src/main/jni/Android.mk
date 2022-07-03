@@ -20,9 +20,9 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
 # will have to uncomment those lines to include the generated source
 # files from the codegen (placed in $(GENERATED_SRC_DIR)/codegen/jni)
 #
-# LOCAL_C_INCLUDES += $(GENERATED_SRC_DIR)/codegen/jni
-# LOCAL_SRC_FILES += $(wildcard $(GENERATED_SRC_DIR)/codegen/jni/*.cpp)
-# LOCAL_EXPORT_C_INCLUDES += $(GENERATED_SRC_DIR)/codegen/jni
+LOCAL_C_INCLUDES += $(GENERATED_SRC_DIR)/codegen/jni
+LOCAL_SRC_FILES += $(wildcard $(GENERATED_SRC_DIR)/codegen/jni/*.cpp)
+LOCAL_EXPORT_C_INCLUDES += $(GENERATED_SRC_DIR)/codegen/jni
 
 # Here you should add any native library you wish to depend on.
 LOCAL_SHARED_LIBRARIES := \
@@ -41,7 +41,8 @@ LOCAL_SHARED_LIBRARIES := \
   librrc_view \
   libruntimeexecutor \
   libturbomodulejsijni \
-  libyoga
+  libyoga \
+  libreact_codegen_myfirstturbomodule
 
 LOCAL_CFLAGS := -DLOG_TAG=\"ReactNative\" -fexceptions -frtti -std=c++17 -Wall
 

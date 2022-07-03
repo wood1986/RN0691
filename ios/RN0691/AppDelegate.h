@@ -6,3 +6,5 @@
 @property (nonatomic, strong) UIWindow *window;
 
 @end
+
+Class MyFirstTurboModuleCls(void) __attribute__((used));

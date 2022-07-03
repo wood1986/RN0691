@@ -8,8 +8,14 @@
  * @format
  */
 
-import React, {type PropsWithChildren} from 'react';
+import
+  React, {
+  useCallback,
+  useState,
+  type PropsWithChildren,
+} from 'react';
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -18,7 +24,6 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
 import {
   Colors,
   DebugInstructions,
@@ -26,6 +31,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import NativeMyFirstTurboModule from './src/NativeMyFirstTurboModule';
 
 const Section: React.FC<
   PropsWithChildren<{
@@ -60,12 +66,23 @@ const Section: React.FC<
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
+  const [text, setText] = useState('');
+
+  const onPress = useCallback(async () => {
+    const {result} =  await NativeMyFirstTurboModule.getString("WooD")
+    setText(result);
+  }, []);
+
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
   return (
     <SafeAreaView style={backgroundStyle}>
+      <View>
+        <Button title='Tap Me' onPress={onPress} />
+        <Text style={{ color: 'red' }}>{text}</Text>
+      </View>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"

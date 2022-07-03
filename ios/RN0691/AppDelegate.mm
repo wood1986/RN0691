@@ -107,6 +107,16 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 
 - (Class)getModuleClassFromName:(const char *)name
 {
+  static const auto sModuleClassMap = new const std::unordered_map<std::string, Class (*)(void)>{
+    {"MyFirstTurboModule", MyFirstTurboModuleCls}
+  };
+
+  auto p = sModuleClassMap->find(name);
+  if (p != sModuleClassMap->end()) {
+    auto classFunc = p->second;
+    return classFunc();
+  }
+
   return RCTCoreModulesClassProvider(name);
 }
 
